@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@unique-nft/solidity-interfaces": "^0.0.1",
+    "hardhat": "^2.12.2"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0"
+  }
+}

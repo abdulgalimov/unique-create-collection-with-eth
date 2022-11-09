@@ -1,13 +1,17 @@
-# Sample Hardhat Project
+# Create and update Unique collection
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+## Environment variables
+```dotenv
+UNIQUERC_RPC_URL=<rpc url>
+METAMASK_PRIVATE_KEY=<private key>
+```
 
-Try running some of the following tasks:
-
+## Deploy contract
 ```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
+npm run deploy:uniquerc 
+```
+
+## Test create and update collection
+```shell
+npm run test
 ```

@@ -1,22 +1,33 @@
 import { ethers } from "hardhat";
+import { config } from "./config";
+import fs from "fs";
+
+const distDir = `./dist`;
+if (!fs.existsSync(distDir)) {
+  fs.mkdirSync(distDir, { recursive: true });
+}
+const outFilename = `${distDir}/${config.network}.json`;
+
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
-
-  const lockedAmount = ethers.utils.parseEther("1");
-
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
-
-  await lock.deployed();
-
-  console.log(`Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`);
+  await deployCollectionManager()
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
+async function deployCollectionManager() {
+  const Factory = await ethers.getContractFactory("CollectionManager");
+  const collectionManager = await Factory.deploy();
+
+  await collectionManager.deployed();
+
+  const saveData = {
+    contractAddress: collectionManager.address,
+  };
+  const saveStr = JSON.stringify(saveData, null, 2);
+  fs.writeFileSync(outFilename, saveStr);
+
+  console.log(`CollectionManager deployed to ${collectionManager.address}`);
+}
+
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

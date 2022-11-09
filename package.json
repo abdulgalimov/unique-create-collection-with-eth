@@ -1,7 +1,14 @@
 {
+  "scripts": {
+    "deploy:uniquerc": "npx hardhat run scripts/deploy.ts --network uniquerc",
+    "test": "npx hardhat test"
+  },
   "dependencies": {
     "@unique-nft/solidity-interfaces": "^0.0.1",
-    "hardhat": "^2.12.2"
+    "dotenv": "^16.0.3",
+    "hardhat": "^2.12.2",
+    "prettier": "^2.7.1",
+    "web3": "^1.8.0"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0"
